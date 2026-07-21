@@ -5,7 +5,6 @@ The current page uses these files:
 | File | Purpose | Loading |
 | --- | --- | --- |
 | `assets/videos/hero-overview.mp4` | Full-screen landing video, encoded at 4× speed | Eager, muted, looping |
-| `assets/videos/overview.mp4` | Main project trailer | Lazy |
 | `assets/videos/motion-forward.mp4` | Forward walking tracking | Lazy |
 | `assets/videos/motion-lateral.mp4` | Lateral walking tracking | Lazy |
 | `assets/videos/motion-balance.mp4` | Single-leg balance tracking | Lazy |

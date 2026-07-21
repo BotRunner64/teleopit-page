@@ -12,16 +12,16 @@ python3 -m http.server 8000
 
 Then open <http://localhost:8000>.
 
-Opening `index.html` directly also works for most of the page, but a local server is more representative of production and avoids browser restrictions around media and clipboard access.
+Opening `index.html` directly also works for most of the page, but a local server is more representative of production and avoids browser restrictions around media.
 
 ## Replace the placeholders
 
-1. Edit titles, authors, affiliations, links, abstract, captions, metrics, and BibTeX in `index.html`.
+1. Edit the project links, section titles, and video labels in `index.html`.
 2. Add the project PDF as `assets/paper.pdf`, or change every paper link.
 3. Replace the placeholder images in `assets/images/`.
 4. Video paths currently used by the page are documented in `assets/videos/README.md`.
 5. Replace `og:image` with a 1200×630 JPG or PNG before publishing; SVG support varies across social platforms.
-6. Search for `your-org`, `your-project`, and `Replace` to find the remaining template values.
+6. Search for `your-org` and `your-project` to find the remaining placeholder links.
 
 ## Media recommendations
 
