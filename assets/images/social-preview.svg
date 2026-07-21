@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">TeleopIt social preview</title>
+  <desc id="desc">Dark blue TeleopIt project title card.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#173e60"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="20%" r="65%">
+      <stop offset="0" stop-color="#52a8ff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#52a8ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="72" y="70" width="50" height="50" rx="25" fill="none" stroke="#aed7ff" stroke-width="2"/>
+  <text x="97" y="103" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">T</text>
+  <text x="144" y="104" fill="#ddecfa" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="4">TELEOPIT PROJECT</text>
+  <text x="72" y="342" fill="#fff" font-family="Arial, sans-serif" font-size="128" font-weight="800" letter-spacing="-8">TELEOP<tspan fill="#52a8ff">IT</tspan></text>
+  <text x="78" y="405" fill="#bdd0e2" font-family="Arial, sans-serif" font-size="28">Replace this line with the project subtitle</text>
+  <path d="M78 486h470" stroke="#52a8ff" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="1050" cy="474" r="120" fill="none" stroke="#b8dcff" stroke-opacity=".2" stroke-width="2"/>
+  <circle cx="1050" cy="474" r="80" fill="none" stroke="#b8dcff" stroke-opacity=".3" stroke-width="2"/>
+  <circle cx="1050" cy="474" r="18" fill="#52a8ff"/>
+</svg>
