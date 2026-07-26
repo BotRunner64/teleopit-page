@@ -147,21 +147,10 @@ a {
 }
 
 .section-heading h2 {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: clamp(2.2rem, 3.8vw, 3.2rem);
   line-height: 1.12;
   letter-spacing: -0.035em;
-}
-
-.section-heading p:last-child {
-  max-width: 800px;
-  margin: 0 auto;
-  color: var(--ink-soft);
-  font-size: 1.25rem;
-}
-
-.section-heading--light p:last-child {
-  color: rgba(235, 244, 252, 0.72);
 }
 
 .section-kicker,
@@ -963,10 +952,6 @@ a {
 
   .section-heading {
     margin-bottom: 36px;
-  }
-
-  .section-heading p:last-child {
-    font-size: 1.1rem;
   }
 
   .site-nav {
