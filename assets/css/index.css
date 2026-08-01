@@ -587,6 +587,18 @@ a {
   margin: 0 auto;
 }
 
+.video-group {
+  margin-top: 52px;
+}
+
+.video-group__title {
+  margin: 0 0 28px;
+  font-size: clamp(1.65rem, 2.4vw, 2rem);
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+}
+
 .video-frame {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -624,7 +636,8 @@ a {
   display: none;
 }
 
-.media-card__copy h3 {
+.media-card__copy h3,
+.media-card__copy h4 {
   margin: 0 0 16px;
   font-size: 1.5rem;
   font-weight: 650;

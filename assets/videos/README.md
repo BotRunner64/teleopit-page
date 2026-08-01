@@ -20,7 +20,12 @@ The current page uses these files:
 | `assets/videos/loco-mani-02.mp4` | Bag transport | Lazy |
 | `assets/videos/loco-mani-03.mp4` | Door opening | Lazy |
 | `assets/videos/loco-mani-04.mp4` | Shelf retrieval | Lazy |
+| `assets/videos/policy-data-collection.mp4` | Teleoperation data collection at 32× speed | Lazy |
+| `assets/videos/policy-vla-deploy-01.mp4` | VLA policy rollout 01 | Lazy |
+| `assets/videos/policy-vla-deploy-02.mp4` | VLA policy rollout 02 | Lazy |
+| `assets/videos/policy-vla-deploy-03.mp4` | VLA policy rollout 03 | Lazy |
+| `assets/videos/policy-vla-deploy-04.mp4` | VLA policy rollout 04 | Lazy |
 
-All published videos are silent H.264 MP4 files with `yuv420p` pixel format and the MP4 index moved to the start of the file (`faststart`). The latency tests and long loco-manipulation clips are 720p web derivatives. Original footage remains in the ignored `teleopit_demo/` directory.
+All published videos are silent H.264 MP4 files with `yuv420p` pixel format and the MP4 index moved to the start of the file (`faststart`). The latency tests, long loco-manipulation clips, and high-level policy clips are 720p web derivatives. Original footage remains in the ignored `teleopit_demo/` directory.
 
 The demo videos use generated JPG posters in `assets/images/`. Change the filenames or captions in `index.html` if a different organization is more convenient.
