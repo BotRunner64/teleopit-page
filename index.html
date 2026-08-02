@@ -34,8 +34,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="assets/css/index.css?v=17" />
-    <script src="assets/js/index.js?v=10" defer></script>
+    <link rel="stylesheet" href="assets/css/index.css?v=18" />
+    <script src="assets/js/index.js?v=11" defer></script>
   </head>
 
   <body>
@@ -43,20 +43,30 @@
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <!-- Full-screen, muted background video in the style of the SONIC project page. -->
+        <!-- The poster is eager; the background video loads only after an explicit click. -->
         <video
+          id="hero-background-video"
           class="hero-video"
-          autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           poster="assets/images/overview-poster.jpg"
         >
-          <source src="assets/videos/hero-overview.mp4" type="video/mp4" />
+          <source data-src="assets/videos/hero-overview.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
+
+      <button
+        class="hero-video-toggle"
+        type="button"
+        aria-controls="hero-background-video"
+        aria-label="Play background video"
+      >
+        <span class="hero-video-toggle__icon" aria-hidden="true">&#9654;</span>
+        <span class="hero-video-toggle__label">Play background</span>
+      </button>
 
       <div class="hero-content">
         <h1 id="hero-title">TELEOP<span>IT</span></h1>
@@ -109,7 +119,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-forward.jpg"
+                  data-poster="assets/images/motion-forward.jpg"
                   aria-label="Forward walking motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-forward.mp4" type="video/mp4" />
@@ -129,7 +139,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-lateral.jpg"
+                  data-poster="assets/images/motion-lateral.jpg"
                   aria-label="Lateral walking motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-lateral.mp4" type="video/mp4" />
@@ -149,7 +159,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-balance.jpg"
+                  data-poster="assets/images/motion-balance.jpg"
                   aria-label="Single-leg balance motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-balance.mp4" type="video/mp4" />
@@ -169,7 +179,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-squat-stand.jpg"
+                  data-poster="assets/images/motion-squat-stand.jpg"
                   aria-label="Squat sit and stand motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-squat-stand.mp4" type="video/mp4" />
@@ -189,7 +199,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-kneel.jpg"
+                  data-poster="assets/images/motion-kneel.jpg"
                   aria-label="Double-knee kneeling motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-kneel.mp4" type="video/mp4" />
@@ -209,7 +219,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/motion-turning.jpg"
+                  data-poster="assets/images/motion-turning.jpg"
                   aria-label="Turning in place motion tracking demonstration"
                 >
                   <source data-src="assets/videos/motion-turning.mp4" type="video/mp4" />
@@ -238,7 +248,7 @@
                 playsinline
                 controls
                 preload="none"
-                poster="assets/images/dexterous-hands.jpg"
+                data-poster="assets/images/dexterous-hands.jpg"
                 aria-label="Parallel dexterous hand control demonstration"
               >
                 <source data-src="assets/videos/dexterous-hands.mp4" type="video/mp4" />
@@ -267,7 +277,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/loco-mani-01.jpg"
+                  data-poster="assets/images/loco-mani-01.jpg"
                   aria-label="Mobile pick-and-place demonstration"
                 >
                   <source data-src="assets/videos/loco-mani-01.mp4" type="video/mp4" />
@@ -287,7 +297,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/loco-mani-02.jpg"
+                  data-poster="assets/images/loco-mani-02.jpg"
                   aria-label="Bag transport demonstration"
                 >
                   <source data-src="assets/videos/loco-mani-02.mp4" type="video/mp4" />
@@ -307,7 +317,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/loco-mani-03.jpg"
+                  data-poster="assets/images/loco-mani-03.jpg"
                   aria-label="Door opening demonstration"
                 >
                   <source data-src="assets/videos/loco-mani-03.mp4" type="video/mp4" />
@@ -327,7 +337,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/loco-mani-04.jpg"
+                  data-poster="assets/images/loco-mani-04.jpg"
                   aria-label="Shelf retrieval demonstration"
                 >
                   <source data-src="assets/videos/loco-mani-04.mp4" type="video/mp4" />
@@ -356,7 +366,7 @@
                 playsinline
                 controls
                 preload="none"
-                poster="assets/images/policy-data-collection.jpg"
+                data-poster="assets/images/policy-data-collection.jpg"
                 aria-label="Teleoperation data collection demonstration"
               >
                 <source data-src="assets/videos/policy-data-collection.mp4" type="video/mp4" />
@@ -380,7 +390,7 @@
                     playsinline
                     controls
                     preload="none"
-                    poster="assets/images/policy-vla-deploy-01.jpg"
+                    data-poster="assets/images/policy-vla-deploy-01.jpg"
                     aria-label="VLA policy rollout 1"
                   >
                     <source data-src="assets/videos/policy-vla-deploy-01.mp4" type="video/mp4" />
@@ -400,7 +410,7 @@
                     playsinline
                     controls
                     preload="none"
-                    poster="assets/images/policy-vla-deploy-02.jpg"
+                    data-poster="assets/images/policy-vla-deploy-02.jpg"
                     aria-label="VLA policy rollout 2"
                   >
                     <source data-src="assets/videos/policy-vla-deploy-02.mp4" type="video/mp4" />
@@ -420,7 +430,7 @@
                     playsinline
                     controls
                     preload="none"
-                    poster="assets/images/policy-vla-deploy-03.jpg"
+                    data-poster="assets/images/policy-vla-deploy-03.jpg"
                     aria-label="VLA policy rollout 3"
                   >
                     <source data-src="assets/videos/policy-vla-deploy-03.mp4" type="video/mp4" />
@@ -440,7 +450,7 @@
                     playsinline
                     controls
                     preload="none"
-                    poster="assets/images/policy-vla-deploy-04.jpg"
+                    data-poster="assets/images/policy-vla-deploy-04.jpg"
                     aria-label="VLA policy rollout 4"
                   >
                     <source data-src="assets/videos/policy-vla-deploy-04.mp4" type="video/mp4" />
@@ -471,7 +481,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/latency-active-vision.jpg"
+                  data-poster="assets/images/latency-active-vision.jpg"
                   aria-label="Active vision latency test"
                 >
                   <source data-src="assets/videos/latency-active-vision.mp4" type="video/mp4" />
@@ -491,7 +501,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/latency-whole-body.jpg"
+                  data-poster="assets/images/latency-whole-body.jpg"
                   aria-label="Whole-body control latency test"
                 >
                   <source data-src="assets/videos/latency-whole-body.mp4" type="video/mp4" />
@@ -511,7 +521,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/latency-hand-retargeting.jpg"
+                  data-poster="assets/images/latency-hand-retargeting.jpg"
                   aria-label="Hand retargeting latency test"
                 >
                   <source data-src="assets/videos/latency-hand-retargeting.mp4" type="video/mp4" />
@@ -531,7 +541,7 @@
                   playsinline
                   controls
                   preload="none"
-                  poster="assets/images/latency-video-streaming.jpg"
+                  data-poster="assets/images/latency-video-streaming.jpg"
                   aria-label="Video streaming latency test"
                 >
                   <source data-src="assets/videos/latency-video-streaming.mp4" type="video/mp4" />

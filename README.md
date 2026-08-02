@@ -25,9 +25,9 @@ Opening `index.html` directly also works for most of the page, but a local serve
 
 ## Media recommendations
 
-- Use a short, silent 16:9 MP4 for the hero.
+- Use a short, silent 16:9 MP4 for the hero; it remains poster-only until the visitor starts it.
 - Export MP4 with H.264 and `yuv420p` for broad compatibility.
-- Keep posters small and compressed so the page remains readable before videos load.
+- Keep posters small and compressed; non-hero posters are hydrated only near the viewport.
 - Non-hero videos load only after the visitor presses play; starting one pauses every other video and cancels unfinished prior downloads.
 - The included published videos are silent, use `faststart`, and are stored in `assets/videos/`.
 - Original footage under `teleopit_demo/` is ignored by Git and is not required by the deployed page.
