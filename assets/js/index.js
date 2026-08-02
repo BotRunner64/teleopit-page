@@ -1,48 +1,16 @@
 (() => {
   "use strict";
 
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const saveData = Boolean(navigator.connection && navigator.connection.saveData);
   const heroVideo = document.querySelector(".hero-video");
-  const heroVideoToggle = document.querySelector(".hero-video-toggle");
-  const heroVideoToggleIcon = heroVideoToggle?.querySelector(".hero-video-toggle__icon");
-  const heroVideoToggleLabel = heroVideoToggle?.querySelector(".hero-video-toggle__label");
   const lazyVideos = [...document.querySelectorAll(".lazy-video")];
   const pageVideos = [heroVideo, ...lazyVideos].filter(Boolean);
+  const heroAutoplayAllowed = Boolean(heroVideo && !prefersReducedMotion && !saveData);
   const lazyVideoUi = new Map();
   let heroIsVisible = true;
-  let heroPlaybackRequested = false;
+  let heroAutoplayReady = false;
   let heroPlayPending = false;
-
-  const setHeroToggleState = (state) => {
-    if (!heroVideoToggle || !heroVideoToggleIcon || !heroVideoToggleLabel) return;
-
-    const states = {
-      idle: {
-        ariaLabel: "Play background video",
-        icon: "\u25b6",
-        label: "Play background",
-        disabled: false,
-      },
-      loading: {
-        ariaLabel: "Loading background video",
-        icon: "\u2026",
-        label: "Loading video",
-        disabled: true,
-      },
-      playing: {
-        ariaLabel: "Pause background video",
-        icon: "\u2016",
-        label: "Pause background",
-        disabled: false,
-      },
-    };
-    const nextState = states[state] || states.idle;
-
-    heroVideoToggle.dataset.state = state;
-    heroVideoToggle.setAttribute("aria-label", nextState.ariaLabel);
-    heroVideoToggle.disabled = nextState.disabled;
-    heroVideoToggleIcon.textContent = nextState.icon;
-    heroVideoToggleLabel.textContent = nextState.label;
-  };
 
   const hydratePoster = (video) => {
     if (!video.dataset.poster) return;
@@ -76,11 +44,6 @@
   };
 
   const pauseOtherVideos = (activeVideo) => {
-    if (activeVideo?.classList.contains("lazy-video")) {
-      heroPlaybackRequested = false;
-      setHeroToggleState("idle");
-    }
-
     pageVideos.forEach((video) => {
       if (video === activeVideo) return;
 
@@ -107,55 +70,20 @@
   };
 
   const playHero = async () => {
-    if (!heroVideo || !heroPlaybackRequested || !heroIsVisible || document.hidden || heroPlayPending) return;
+    if (!heroAutoplayAllowed || !heroAutoplayReady || !heroIsVisible || document.hidden || heroPlayPending) return;
 
     pauseOtherVideos(heroVideo);
     hydrateVideo(heroVideo);
     heroPlayPending = true;
-    setHeroToggleState("loading");
 
     try {
       await heroVideo.play();
-      if (heroPlaybackRequested) setHeroToggleState("playing");
     } catch {
-      if (heroPlaybackRequested) {
-        heroPlaybackRequested = false;
-        setHeroToggleState("idle");
-      }
+      // Autoplay can still be rejected by browser policy; the poster remains visible.
     } finally {
       heroPlayPending = false;
     }
   };
-
-  if (heroVideo && heroVideoToggle) {
-    setHeroToggleState("idle");
-
-    heroVideoToggle.addEventListener("click", () => {
-      if (heroPlaybackRequested) {
-        heroPlaybackRequested = false;
-        heroVideo.pause();
-        setHeroToggleState("idle");
-        return;
-      }
-
-      heroPlaybackRequested = true;
-      playHero();
-    });
-
-    heroVideo.addEventListener("waiting", () => {
-      if (heroPlaybackRequested) setHeroToggleState("loading");
-    });
-
-    heroVideo.addEventListener("playing", () => {
-      if (heroPlaybackRequested) setHeroToggleState("playing");
-    });
-
-    heroVideo.addEventListener("error", () => {
-      if (heroVideo.dataset.unloaded === "true") return;
-      heroPlaybackRequested = false;
-      setHeroToggleState("idle");
-    });
-  }
 
   if (heroVideo && "IntersectionObserver" in window) {
     const heroObserver = new IntersectionObserver(
@@ -168,6 +96,16 @@
     );
 
     heroObserver.observe(heroVideo);
+  }
+
+  const enableHeroAutoplay = () => {
+    heroAutoplayReady = true;
+    playHero();
+  };
+
+  if (heroAutoplayAllowed) {
+    if (document.readyState === "complete") enableHeroAutoplay();
+    else window.addEventListener("load", enableHeroAutoplay, { once: true });
   }
 
   const createPlayButton = (video) => {

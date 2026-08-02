@@ -34,8 +34,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="assets/css/index.css?v=18" />
-    <script src="assets/js/index.js?v=11" defer></script>
+    <link rel="stylesheet" href="assets/css/index.css?v=19" />
+    <script src="assets/js/index.js?v=12" defer></script>
   </head>
 
   <body>
@@ -43,9 +43,8 @@
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <!-- The poster is eager; the background video loads only after an explicit click. -->
+        <!-- The poster paints first; JavaScript starts the muted video after initial page load. -->
         <video
-          id="hero-background-video"
           class="hero-video"
           muted
           loop
@@ -57,16 +56,6 @@
         </video>
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
-
-      <button
-        class="hero-video-toggle"
-        type="button"
-        aria-controls="hero-background-video"
-        aria-label="Play background video"
-      >
-        <span class="hero-video-toggle__icon" aria-hidden="true">&#9654;</span>
-        <span class="hero-video-toggle__label">Play background</span>
-      </button>
 
       <div class="hero-content">
         <h1 id="hero-title">TELEOP<span>IT</span></h1>
