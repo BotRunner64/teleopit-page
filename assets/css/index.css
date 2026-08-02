@@ -615,6 +615,46 @@ a {
   background: #0b1725;
 }
 
+.video-play-button {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: rgba(255, 255, 255, 0.92);
+  background: transparent;
+  cursor: pointer;
+}
+
+.video-play-button i {
+  font-size: clamp(48px, 6vw, 58px);
+  transition: color 140ms ease;
+}
+
+.video-play-button:hover {
+  color: #fff;
+}
+
+.video-play-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+}
+
+.video-play-button[hidden] {
+  display: none;
+}
+
+.video-play-button:disabled {
+  cursor: progress;
+}
+
+.video-frame.is-loading .video-play-button i {
+  font-size: 42px;
+}
+
 .video-frame--dexterous {
   aspect-ratio: 1280 / 816;
   background: #000;
