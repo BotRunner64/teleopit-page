@@ -7,11 +7,41 @@
   const lazyVideos = [...document.querySelectorAll(".lazy-video")];
   const pageVideos = [heroVideo, ...lazyVideos].filter(Boolean);
   const heroAutoplayEnabled = Boolean(heroVideo && !prefersReducedMotion && !saveData);
+  const lazyVideoUi = new Map();
   let heroIsVisible = false;
+
+  const resetLazyVideo = (video) => {
+    const ui = lazyVideoUi.get(video);
+    if (!ui) return;
+
+    ui.frame.classList.remove("is-loading", "is-ready");
+    ui.frame.removeAttribute("aria-busy");
+    video.controls = false;
+    ui.playButton.hidden = false;
+    ui.playButton.disabled = false;
+    ui.playIcon.className = "fa-solid fa-circle-play";
+  };
+
+  const cancelUnfinishedLoad = (video) => {
+    video.pause();
+    video.dataset.unloaded = "true";
+    video.removeAttribute("src");
+    video.querySelectorAll("source[src]").forEach((source) => {
+      if (!source.dataset.src) source.dataset.src = source.getAttribute("src");
+      source.removeAttribute("src");
+    });
+    if (video.classList.contains("lazy-video")) delete video.dataset.hydrated;
+    video.load();
+    if (video.classList.contains("lazy-video")) resetLazyVideo(video);
+  };
 
   const pauseOtherVideos = (activeVideo) => {
     pageVideos.forEach((video) => {
-      if (video !== activeVideo) video.pause();
+      if (video === activeVideo) return;
+
+      const hasUnfinishedLoad = video.networkState === HTMLMediaElement.NETWORK_LOADING;
+      video.pause();
+      if (hasUnfinishedLoad) cancelUnfinishedLoad(video);
     });
   };
 
@@ -27,6 +57,15 @@
   const playHero = () => {
     if (!heroAutoplayEnabled || !heroIsVisible || document.hidden) return;
     pauseOtherVideos(heroVideo);
+
+    if (heroVideo.dataset.unloaded === "true") {
+      heroVideo.querySelectorAll("source[data-src]").forEach((source) => {
+        source.src = source.dataset.src;
+      });
+      delete heroVideo.dataset.unloaded;
+      heroVideo.load();
+    }
+
     const playRequest = heroVideo.play();
     if (playRequest) playRequest.catch(() => {});
   };
@@ -49,9 +88,9 @@
 
     video.querySelectorAll("source[data-src]").forEach((source) => {
       source.src = source.dataset.src;
-      source.removeAttribute("data-src");
     });
 
+    delete video.dataset.unloaded;
     video.dataset.hydrated = "true";
     video.load();
   };
@@ -75,6 +114,7 @@
     if (!frame) return;
 
     const { button: playButton, icon: playIcon } = createPlayButton(video);
+    lazyVideoUi.set(video, { frame, playButton, playIcon });
     video.controls = false;
     video.setAttribute("loading", "lazy");
     frame.append(playButton);
@@ -85,6 +125,7 @@
     });
 
     video.addEventListener("error", () => {
+      if (video.dataset.unloaded === "true") return;
       frame.classList.add("is-missing");
       frame.classList.remove("is-loading");
       frame.removeAttribute("aria-busy");
@@ -119,7 +160,7 @@
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pageVideos.forEach((video) => video.pause());
+    if (document.hidden) pauseOtherVideos(null);
     else playHero();
   });
 })();
