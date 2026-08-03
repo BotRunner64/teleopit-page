@@ -416,6 +416,57 @@ a {
   height: 25px;
 }
 
+.hero-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin-top: 18px;
+  font-family: var(--font-body);
+}
+
+.hero-code__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-code__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(38, 38, 38, 0.76);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.hero-code__link i {
+  flex: 0 0 auto;
+  font-size: 1rem;
+}
+
+.hero-code__link:hover {
+  border-color: rgba(255, 255, 255, 0.64);
+  background: rgba(38, 38, 38, 0.94);
+  transform: translateY(-1px);
+}
+
 .scroll-cue {
   position: absolute;
   bottom: 26px;
@@ -1121,6 +1172,12 @@ a {
     padding: 0 17px;
   }
 
+  .hero-code {
+    display: flex;
+    width: min(100%, 390px);
+    margin-top: 16px;
+  }
+
   .publication-title {
     font-size: clamp(2.1rem, 10vw, 3.2rem);
   }
@@ -1156,11 +1213,36 @@ a {
   }
 
   .hero-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: min(100%, 360px);
     max-width: 340px;
   }
 
   .hero-action {
-    flex: 1 1 42%;
+    min-width: 0;
+    padding: 0 10px;
+    gap: 7px;
+  }
+
+  .hero-code__links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+  }
+
+  .hero-code__link {
+    min-height: 42px;
+    padding: 4px 10px;
+    white-space: normal;
+  }
+
+  .hero-code__link:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 4px);
   }
 
   .scroll-cue {
